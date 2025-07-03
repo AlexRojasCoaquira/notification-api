@@ -1,7 +1,7 @@
 // import { notificationService } from './NotificationService'
 const { notificationService } = require('./NotificationService.js')
 const sendNotification = async (req, res) => {
-  const { token, title, body, eventId, image, icon, click_action } = req.body;
+  const { token, title, body, eventId, image, click_action } = req.body;
   if (!token) {
     return res.status(400).json({ error: 'Token FCM requerido' })
   }
@@ -13,7 +13,6 @@ const sendNotification = async (req, res) => {
       body,
       eventId,
       image,
-      icon,
       click_action
     })
     console.log('Notificación enviada con éxito:', response)
