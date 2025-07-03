@@ -1,7 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const { sendNotification } = require('./notificationController');
+
 const app = express();
 const port = 3001;
+app.use(cors());
 // Middleware para parsear JSON
 app.use(express.json());
 
