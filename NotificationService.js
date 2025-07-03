@@ -10,13 +10,14 @@ admin.initializeApp({
 
 const messaging = admin.messaging();
 
-const notificationService = async (token, { title, body, eventId, image, click_action }) => {
+const notificationService = async (token, { title, body, eventId, image, icon, click_action }) => {
   console.log('Enviando notificación a:', token);
   const message = {
     notification: {
       title: title || 'Notificación',
       body: body || 'Tienes un nuevo evento',
       image: image || 'https://example.com/image.png',
+      icon: icon || 'https://example.com/image.png',
     },
     data: {
       eventId: eventId || '12345',

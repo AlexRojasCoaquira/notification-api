@@ -13,6 +13,7 @@ const sendNotification = async (req, res) => {
       body,
       eventId,
       image,
+      icon,
       click_action
     })
     console.log('Notificación enviada con éxito:', response)
