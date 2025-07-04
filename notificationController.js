@@ -40,12 +40,15 @@ const subscribeToTopic = async (req, res) => {
 }
 
 const sendMessageByTopic = async (req, res) => {
-    const { topic, notification } = req.body;
-    console.log('Enviando mensaje a topic', topic)
-    console.log('payload', notification)
+    console.log('Enviando mensaje a topic', req.body)
+    const { topic, data } = req.body;
+    console.log('payload', data)
+    const payload = {
+        topic,
+        data
+    }
     try {
-        const response = await sendMessage(topic, notification)
-        console.log('Mensaje enviado con éxito:', response)
+        const response = await sendMessage(payload)
         return res.status(200).json({ message: 'Mensaje enviado con éxito', response })
     } catch (error) {
         console.error('Error al enviar el mensaje:', error)

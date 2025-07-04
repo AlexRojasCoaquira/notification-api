@@ -44,16 +44,12 @@ const subscribeService = async (token, topic) => {
   }
 };
 
-const sendMessage = async (topic, notification) => {
+const sendMessage = async (payload) => {
   try {
-    const payload = {
-      topic,
-      notification,
-    };
     const response = await messaging.send(payload);
     console.log('Mensaje enviado con éxito:', response);
   } catch (error) {
-    console.error('Error al enviar el mensaje1:', error);
+    console.error('Error al enviar el mensaje:', error);
   }
 }
 // Exporta la función
