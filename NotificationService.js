@@ -11,7 +11,6 @@ admin.initializeApp({
 const messaging = admin.messaging();
 
 const notificationService = async (token, { title, body, eventId, image, icon, click_action }) => {
-  console.log('Enviando notificación a:', token);
   const message = {
     notification: {
       title: title || 'Notificación',
@@ -26,7 +25,6 @@ const notificationService = async (token, { title, body, eventId, image, icon, c
     token,
   };
   console.log('message1', message);
-  console.log('messaging', messaging);
   try {
     const response = await messaging.send(message);
     console.log('response', response);
@@ -39,7 +37,7 @@ const notificationService = async (token, { title, body, eventId, image, icon, c
 const subscribeService = async (token, topic) => {
   try {
     const response = await messaging.subscribeToTopic(token, topic);
-    console.log('Suscripción exitosa:', response);
+    console.log(`Suscrito al tema ${topic}`, response);
     return response;
   } catch (error) {
     throw new Error('Error al suscribir al tema: ' + error);
