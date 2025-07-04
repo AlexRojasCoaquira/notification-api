@@ -1,7 +1,7 @@
 // import { notificationService } from './NotificationService'
-const { notificationService } = require('./NotificationService.js')
+const { notificationService, subscribeService, sendMessage } = require('./NotificationService.js')
 const sendNotification = async (req, res) => {
-  const { token, title, body, eventId, image, click_action } = req.body;
+  const { token, title, body, eventId, image, icon, click_action } = req.body;
   if (!token) {
     return res.status(400).json({ error: 'Token FCM requerido' })
   }
@@ -13,6 +13,7 @@ const sendNotification = async (req, res) => {
       body,
       eventId,
       image,
+      icon,
       click_action
     })
     console.log('Notificación enviada con éxito:', response)
@@ -21,4 +22,40 @@ const sendNotification = async (req, res) => {
     return res.status(500).json({ error: 'Error al enviar notificación', details: err })
   }
 }
-module.exports = { sendNotification };
+
+const subscribeToTopic = async (req, res) => {
+  const { token, topic } = req.body;
+    if (!token || !topic) {
+        return res.status(400).json({ error: 'Token y tema requeridos' })
+    }
+    try {
+        console.log('Suscribiendo token:', token, 'al tema:', topic)
+        const response = await subscribeService(token, topic)
+        console.log('Suscripción exitosa:', response)
+        return res.status(200).json({ message: 'Suscripción exitosa', response })
+    } catch (err) {
+        console.error('Error al suscribir al tema:', err)
+        return res.status(500).json({ error: 'Error al suscribir al tema', details: err })
+    }
+}
+
+const sendMessageByTopic = async (req, res) => {
+    const { topic, notification } = req.body;
+    console.log('Enviando mensaje a topic', topic)
+    console.log('payload', notification)
+    try {
+        const response = await sendMessage(topic, notification)
+        console.log('Mensaje enviado con éxito:', response)
+        return res.status(200).json({ message: 'Mensaje enviado con éxito', response })
+    } catch (error) {
+        console.error('Error al enviar el mensaje:', error)
+        return res.status(500).json({ error: 'Error al enviar el mensaje', details: error })
+    }
+}
+
+
+module.exports = {
+    sendNotification,
+    subscribeToTopic,
+    sendMessageByTopic
+ };

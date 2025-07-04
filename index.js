@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { sendNotification } = require('./notificationController');
+const { sendNotification, subscribeToTopic, sendMessageByTopic } = require('./notificationController');
 
 const app = express();
 const port = 3001;
@@ -14,6 +14,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/send-notification', sendNotification);
+app.post('/suscribe', subscribeToTopic);
+app.post('/send-topic', sendMessageByTopic);
 
 // Levantar el servidor
 app.listen(port, () => {
