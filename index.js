@@ -3,7 +3,7 @@ const cors = require('cors');
 const { sendNotification, subscribeToTopic, sendMessageByTopic } = require('./notificationController');
 
 const app = express();
-const port = 3002;
+const port = 3001;
 app.use(cors({
   origin: '*', // acepta todos los orígenes
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
