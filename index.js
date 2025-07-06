@@ -4,7 +4,11 @@ const { sendNotification, subscribeToTopic, sendMessageByTopic } = require('./no
 
 const app = express();
 const port = 3002;
-app.use(cors());
+app.use(cors({
+  origin: '*', // acepta todos los orígenes
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 // Middleware para parsear JSON
 app.use(express.json());
 
