@@ -36,7 +36,7 @@ const notificationService = async (token, { title, body, eventId, image, icon, c
 
 const subscribeService = async (token, topic) => {
   try {
-    const response = await messaging.subscribeToTopic(token, topic);
+    const response = await messaging.subscribeToTopic([token], topic);
     console.log(`Suscrito al tema ${topic}`, response);
     return response;
   } catch (error) {

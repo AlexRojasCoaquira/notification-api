@@ -3,7 +3,7 @@ const cors = require('cors');
 const { sendNotification, subscribeToTopic, sendMessageByTopic } = require('./notificationController');
 
 const app = express();
-const port = 3001;
+const port = 3002;
 app.use(cors());
 // Middleware para parsear JSON
 app.use(express.json());
