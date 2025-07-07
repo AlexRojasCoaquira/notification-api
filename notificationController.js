@@ -60,8 +60,9 @@ const sendMessageByTopic = async (req, res) => {
       delete payload.topic
     }
     try {
-        const response = await sendMessage(payload)
-        return res.status(200).json({ message: 'Mensaje enviado con éxito', response })
+      const response = await sendMessage(payload)
+      console.log('response', response)
+      return res.status(200).json({ message: 'Mensaje enviado con éxito', response })
     } catch (error) {
         console.error('Error al enviar el mensaje:', error)
         return res.status(500).json({ error: 'Error al enviar el mensaje', details: error })

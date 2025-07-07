@@ -53,6 +53,7 @@ const sendMessage = async (payload) => {
   try {
     const response = await messaging.send(payload);
     console.log('Mensaje enviado con éxito:', response);
+    return response;
   } catch (error) {
     console.error('Error al enviar el mensaje:', error);
   }
