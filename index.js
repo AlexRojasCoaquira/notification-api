@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const { sendNotification, subscribeToTopic, sendMessageByTopic } = require('./notificationController');
+const {
+  sendNotification,
+  subscribeToTopic,
+  sendMessageByTopic,
+} = require('./notificationController');
 
 const app = express();
 const port = 3001;

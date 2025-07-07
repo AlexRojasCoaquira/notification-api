@@ -43,6 +43,15 @@ const subscribeService = async (token, topic) => {
     throw new Error('Error al suscribir al tema: ' + error);
   }
 };
+const unsubscribeService = async (token, topic) => {
+  try {
+    const response = await messaging.unsubscribeFromTopic([token], topic);
+    console.log(`Suscripcion cancelada al tema ${topic}`, response);
+    return response;
+  } catch (error) {
+    throw new Error('Error al suscribir al tema: ' + error);
+  }
+};
 
 const sendMessage = async (payload) => {
   try {
@@ -56,5 +65,6 @@ const sendMessage = async (payload) => {
 module.exports = {
   notificationService,
   subscribeService,
+  unsubscribeService,
   sendMessage
 };

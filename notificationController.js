@@ -1,5 +1,5 @@
 // import { notificationService } from './NotificationService'
-const { notificationService, subscribeService, sendMessage } = require('./NotificationService.js')
+const { notificationService, subscribeService, sendMessage, unsubscribeService } = require('./NotificationService.js')
 const sendNotification = async (req, res) => {
   const { token, title, body, eventId, image, icon, click_action } = req.body;
   if (!token) {
@@ -25,14 +25,22 @@ const sendNotification = async (req, res) => {
 
 const subscribeToTopic = async (req, res) => {
   const { token, topic } = req.body;
+  const { suscribe = '1' } = req.query;
     if (!token || !topic) {
         return res.status(400).json({ error: 'Token y tema requeridos' })
     }
     try {
-        console.log('Suscribiendo token:', token, 'al tema:', topic)
-        const response = await subscribeService(token, topic)
+      let response = null;
+      let message = `Suscripción exitosa al topic ${topic}`
+      if (suscribe === '1') {
+        response = await subscribeService(token, topic)
         console.log('Suscripción exitosa:', response)
-        return res.status(200).json({ message: 'Suscripción exitosa', response })
+      } else {
+        response = await unsubscribeService(token, topic)
+        console.log('Suscripción cancelada:', response)
+        message = 'Suscripción cancelada'
+      }
+      return res.status(200).json({ message, response })
     } catch (err) {
         console.error('Error al suscribir al tema:', err)
         return res.status(500).json({ error: 'Error al suscribir al tema', details: err })
