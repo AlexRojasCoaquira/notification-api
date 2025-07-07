@@ -12,15 +12,11 @@ const messaging = admin.messaging();
 
 const notificationService = async (token, { title, body, eventId, image, icon, click_action }) => {
   const message = {
-    notification: {
+    data: {
       title: title || 'Notificación',
       body: body || 'Tienes un nuevo evento',
       image: image || 'https://example.com/image.png',
       icon: icon || 'https://example.com/image.png',
-    },
-    data: {
-      eventId: eventId || '123456',
-      click_action: click_action || '/eventos',
     },
     token,
   };

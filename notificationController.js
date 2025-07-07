@@ -49,11 +49,15 @@ const subscribeToTopic = async (req, res) => {
 
 const sendMessageByTopic = async (req, res) => {
     console.log('Enviando mensaje a topic', req.body)
-    const { topic, data } = req.body;
+    const { topic, data, token } = req.body;
     console.log('payload', data)
     const payload = {
         topic,
         data
+    }
+    if(token) {
+      payload.token = token
+      delete payload.topic
     }
     try {
         const response = await sendMessage(payload)
